@@ -1,6 +1,6 @@
 import pygame 
 from support import import_csv_layout, import_cut_graphics
-from settings import tile_size, screen_height, screen_width
+from settings import tile_size, screen_height, screen_width, path
 from tiles import Tile, StaticTile, Crate, Coin, Palm
 from enemy import Enemy
 from decoration import Sky, Water, Clouds
@@ -16,8 +16,8 @@ class Level:
 		self.current_x = None
 
 		# audio 
-		self.coin_sound = pygame.mixer.Sound('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/audio/effects/coin.wav')
-		self.stomp_sound = pygame.mixer.Sound('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/audio/effects/stomp.wav')
+		self.coin_sound = pygame.mixer.Sound(f'{path}phyton_game/game/audio/effects/coin.wav')
+		self.stomp_sound = pygame.mixer.Sound(f'{path}phyton_game/game/audio/effects/stomp.wav')
 
 		# overworld connection 
 		self.create_overworld = create_overworld
@@ -89,12 +89,12 @@ class Level:
 					y = row_index * tile_size
 
 					if type == 'terrain':
-						terrain_tile_list = import_cut_graphics('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/terrain/terrain_tiles.png')
+						terrain_tile_list = import_cut_graphics(f'{path}phyton_game/game/graphics/terrain/terrain_tiles.png')
 						tile_surface = terrain_tile_list[int(val)]
 						sprite = StaticTile(tile_size,x,y,tile_surface)
 						
 					if type == 'grass':
-						grass_tile_list = import_cut_graphics('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/decoration/grass/grass.png')
+						grass_tile_list = import_cut_graphics(f'{path}phyton_game/game/graphics/decoration/grass/grass.png')
 						tile_surface = grass_tile_list[int(val)]
 						sprite = StaticTile(tile_size,x,y,tile_surface)
 					
@@ -102,15 +102,15 @@ class Level:
 						sprite = Crate(tile_size,x,y)
 
 					if type == 'coins':
-						if val == '0': sprite = Coin(tile_size,x,y,'/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/coins/gold',5)
-						if val == '1': sprite = Coin(tile_size,x,y,'/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/coins/silver',1)
+						if val == '0': sprite = Coin(tile_size,x,y,f'{path}phyton_game/game/graphics/coins/gold',5)
+						if val == '1': sprite = Coin(tile_size,x,y,f'{path}phyton_game/game/graphics/coins/silver',1)
 
 					if type == 'fg palms':
-						if val == '0': sprite = Palm(tile_size,x,y,'/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/terrain/palm_small',38)
-						if val == '1': sprite = Palm(tile_size,x,y,'/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/terrain/palm_large',64)
+						if val == '0': sprite = Palm(tile_size,x,y,f'{path}phyton_game/game/graphics/terrain/palm_small',38)
+						if val == '1': sprite = Palm(tile_size,x,y,f'{path}phyton_game/game/graphics/terrain/palm_large',64)
 
 					if type == 'bg palms':
-						sprite = Palm(tile_size,x,y,'/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/terrain/palm_bg',64)
+						sprite = Palm(tile_size,x,y,f'{path}phyton_game/game/graphics/terrain/palm_bg',64)
 
 					if type == 'enemies':
 						sprite = Enemy(tile_size,x,y)
@@ -131,7 +131,7 @@ class Level:
 					sprite = Player((x,y),self.display_surface,self.create_jump_particles,change_health)
 					self.player.add(sprite)
 				if val == '1':
-					hat_surface = pygame.image.load('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/character/hat.png').convert_alpha()
+					hat_surface = pygame.image.load(f'{path}phyton_game/game/graphics/character/hat.png').convert_alpha()
 					sprite = StaticTile(tile_size,x,y,hat_surface)
 					self.goal.add(sprite)
 

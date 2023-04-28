@@ -1,4 +1,5 @@
 import pygame
+from settings import path
 
 class UI:
 	def __init__(self,surface):
@@ -7,15 +8,15 @@ class UI:
 		self.display_surface = surface 
 
 		# health 
-		self.health_bar = pygame.image.load('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/ui/health_bar.png').convert_alpha()
+		self.health_bar = pygame.image.load(f'{path}phyton_game/game/graphics/ui/health_bar.png').convert_alpha()
 		self.health_bar_topleft = (54,39)
 		self.bar_max_width = 152
 		self.bar_height = 4
 
 		# coins 
-		self.coin = pygame.image.load('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/ui/coin.png').convert_alpha()
+		self.coin = pygame.image.load(f'{path}phyton_game/game/graphics/ui/coin.png').convert_alpha()
 		self.coin_rect = self.coin.get_rect(topleft = (50,61))
-		self.font = pygame.font.Font('/Users/PC/OneDrive/Рабочий стол/phyton_game/game/graphics/ui/ARCADEPI.ttf',30)
+		self.font = pygame.font.Font(f'{path}phyton_game/game/graphics/ui/ARCADEPI.ttf',30)
 
 	def show_health(self,current,full):
 		self.display_surface.blit(self.health_bar,(20,10))
